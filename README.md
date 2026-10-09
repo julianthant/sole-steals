@@ -1,81 +1,77 @@
-# ShoeStore Website
+# Sole Steals
 
-Welcome to the ShoeStore website project! This is a platform designed for selling a wide variety of shoes, providing users with a seamless shopping experience. Whether you're a shoe enthusiast or a casual shopper, our website aims to offer a diverse selection of footwear to suit your style.
+A sneaker store built with React, Vite and Firebase. Shoppers browse sneakers by brand, filter them, add sizes and colors to a cart, check out and track their orders. Built between October 2023 and January 2024.
 
-## Table of Contents
+**Live site:** https://solesteals.netlify.app
 
-- [About the Project](#about-the-project)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+![Sole Steals home page](.github/assets/home.png)
 
-## About the Project
+![Sole Steals collections page with filters](.github/assets/collections.png)
 
-[Project Name] is an e-commerce website developed for selling shoes online. It offers a user-friendly interface that allows customers to browse through various categories of shoes, view product details, and make secure purchases. The project focuses on providing a visually appealing and efficient platform for both buyers and sellers.
+## Status
 
-## Features
+Complete for its scope. Shopping, checkout, orders and accounts all work against Firebase.
 
-- **User Authentication:** It uses firebase to authenticate the user.
+## What it does
 
-- **Product Catalog:** The main collections page has every shoe in stock.
+- Browses sneakers by brand with search, gender, size and price filters and paginated results.
+- Shows a product page with color, size and quantity pickers.
+- Keeps a per-user cart in Firestore and shows the item count in the navbar.
+- Checks out with a saved billing address and card, then creates an order with a tracking status.
+- Lists past orders and shows each order's details.
+- Handles accounts with Firebase Auth: sign-up, sign-in, email verification, password reset and email change.
+- Lets a signed-in user edit account details, billing addresses and saved cards.
 
-- **Payment Integration:** Works with most generated cards.
+Saved cards are a demo. Enter test card numbers only.
 
-- **Order Tracking:** A fixed amount of time has been applied to all orders.
+## How it works
 
-- **Responsive Design:** It uses tailwind to make the design responsive.
+Firebase is the whole backend. Firebase Auth handles accounts. Firestore stores the catalog, with one collection per brand, and per-user data in the `users_cart`, `users_orders`, `users_billing` and `users_cards` collections. `PrivateRoute` keeps the dashboard, account, checkout and order pages behind sign-in.
 
-## Getting Started
+## Tech stack
 
-To get started with the ShoeStore website, follow these steps:
+- React 18, React Router 6 and Vite
+- Firebase Auth and Cloud Firestore
+- Tailwind CSS and Framer Motion
+- Netlify for hosting
 
-1. **Clone the Repository:**
+## Run it locally
+
+You need Node.js 18 or later and a Firebase project with Auth (email and password) and Firestore turned on.
+
+1. Install the dependencies:
 
    ```bash
-   git clone https://github.com/SoyJuju/online-shop.git
-   ```
-
-2. **Install Dependencies:**
-
-   ```bash
-   cd ShoeStore
    npm install
    ```
 
-3. **Configure Environment Variables:**
-
-   - Create a `.env` file in the root directory.
-   - Add the necessary environment variables (e.g., database connection strings, API keys).
-
-4. **Run the Application:**
+2. Create `.env` with your Firebase web app config:
 
    ```bash
-   npm start
+   VITE_FIREBASE_API_KEY=
+   VITE_FIREBASE_AUTH_DOMAIN=
+   VITE_FIREBASE_PROJECT_ID=
+   VITE_FIREBASE_STORAGE_BUCKET=
+   VITE_FIREBASE_MESSAGING_ID=
+   VITE_FIREBASE_APP_ID=
+   VITE_FIREBASE_MEASUREMENT_ID=
    ```
 
-5. **Access the Website:**
-   Open your browser and navigate to `http://localhost:3000` to view the ShoeStore website.
+3. Start the dev server:
 
-## Usage
+   ```bash
+   npm run dev
+   ```
 
-[Provide any additional information or guidelines on how users can effectively use your website.]
+The catalog reads from Firestore, so the shop is empty until you add sneaker documents under a brand collection.
 
-## Contributing
+## Project layout
 
-Contributions are welcome! If you have any ideas, improvements, or bug fixes, please feel free to open an issue or submit a pull request. For major changes, please discuss them in advance.
-
-## License
-
-This project is licensed under the [Your License Name] - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For inquiries, feedback, or support, please contact:
-
-- Julian Hein
-- Email: julianthant@gmail.com
-
-We appreciate your interest in the ShoeStore website project! Happy shopping!
+```text
+database/firebase.jsx            Firebase app, Auth and Firestore setup
+src/components/authentication/   Sign-up, sign-in, verification and reset screens
+src/components/main/             Dashboard, orders, billing and card settings
+src/components/pages/            Home, collections, sneaker grid and details, cart, checkout, FAQ
+src/contexts/                    Auth and cart-quantity contexts
+src/utilities/                   Firestore reads and writes for cart, orders and payments
+```
