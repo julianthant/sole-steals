@@ -2,7 +2,7 @@
 
 A sneaker store built with React, Vite and Firebase. Shoppers browse sneakers by brand, filter them, add sizes and colors to a cart, check out and track their orders. Built between October 2023 and January 2024.
 
-**Live site:** https://solesteals.netlify.app
+**Live site:** https://solesteals.julianzaw.me
 
 ![Sole Steals home page](.github/assets/home.png)
 
@@ -33,7 +33,7 @@ Firebase is the whole backend. Firebase Auth handles accounts. Firestore stores 
 - React 18, React Router 6 and Vite
 - Firebase Auth and Cloud Firestore
 - Tailwind CSS and Framer Motion
-- Netlify for hosting
+- Vercel for hosting
 
 ## Run it locally
 
